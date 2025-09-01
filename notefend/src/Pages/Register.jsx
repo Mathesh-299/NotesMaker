@@ -10,7 +10,10 @@ const Register = () => {
     const [step, setStep] = useState("form");
     const [form, setForm] = useState({ username: "", email: "", dateOfBirth: "" });
     const [otp, setOtp] = useState("");
+    const [timer, setTimer] = useState(0);
+
     const navigate = useNavigate();
+
     const handleChange = (e) =>
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
@@ -26,8 +29,7 @@ const Register = () => {
             const response = await API.post("/user/register", form);
             if (response.status === 200 || response.status === 201) {
                 setStep("otp");
-                setTimer(30);
-                startTimer();
+                startTimer(30);
                 toast.success("OTP sent to your email!");
             }
         } catch (error) {
@@ -36,7 +38,6 @@ const Register = () => {
             setLoading(false);
         }
     };
-
 
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
@@ -51,13 +52,12 @@ const Register = () => {
             const data = { email, otp };
             const response = await API.post("/user/otpPost", data);
             toast.success("Account verified successfully!");
-            navigate("/login")
+            navigate("/login");
             console.log(response.data);
         } catch (error) {
             toast.error(error.response?.data?.message || "Invalid OTP, please try again");
         } finally {
             setOtpLoading(false);
-
         }
     };
 
@@ -66,11 +66,9 @@ const Register = () => {
         const { email } = form;
         setResendLoading(true);
         try {
-            const response = await API.post("/user/resendOTP", { email });
-            console.log(response);
+            await API.post("/user/resendOTP", { email });
             setOtp("");
-            setTimer(30);
-            startTimer();
+            startTimer(30);
             toast.success("OTP resent successfully!");
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to resend OTP");
@@ -79,14 +77,16 @@ const Register = () => {
         }
     };
 
-
-
-    const startTimer = () => {
-        let sec = 30;
+    const startTimer = (seconds) => {
+        setTimer(seconds);
         const countdown = setInterval(() => {
-            sec -= 1;
-            setTimer(sec);
-            if (sec === 0) clearInterval(countdown);
+            setTimer((prev) => {
+                if (prev <= 1) {
+                    clearInterval(countdown);
+                    return 0;
+                }
+                return prev - 1;
+            });
         }, 1000);
     };
 
@@ -113,7 +113,6 @@ const Register = () => {
                                 value={form.username}
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-gray-700 focus:ring-2 focus:ring-gray-500 transition"
-                            // required
                             />
                         </div>
 
@@ -127,7 +126,6 @@ const Register = () => {
                                 value={form.dateOfBirth}
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-gray-700 focus:ring-2 focus:ring-gray-500 transition"
-                            // required
                             />
                         </div>
 
@@ -141,9 +139,7 @@ const Register = () => {
                                 placeholder="example@email.com"
                                 value={form.email}
                                 onChange={handleChange}
-                                // onChange={(e) => setemailValue(e.target.value)}
                                 className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-gray-700 focus:ring-2 focus:ring-gray-500 transition"
-                            // required
                             />
                         </div>
 
@@ -158,7 +154,6 @@ const Register = () => {
                                 "Continue"
                             )}
                         </button>
-
                     </form>
                 )}
 
@@ -177,7 +172,6 @@ const Register = () => {
                                     value={otp}
                                     onChange={(e) => setOtp(e.target.value.replace(/\D/, ""))}
                                     className="w-full tracking-[1em] text-center text-xl font-bold px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-gray-700 focus:ring-2 focus:ring-gray-500 transition"
-                                    // required
                                     autoFocus
                                 />
                             </div>
@@ -194,16 +188,14 @@ const Register = () => {
                                 )}
                             </button>
 
-
-
                             {timer > 0 ? (
-                                <p>Resend OTP in {timer}s</p>
+                                <p className="text-center">Resend OTP in {timer}s</p>
                             ) : (
                                 <button
                                     type="button"
                                     onClick={handleResend}
                                     disabled={resendLoading}
-                                    className="text-blue-600 hover:underline font-semibold flex items-center justify-center"
+                                    className="text-blue-600 hover:underline font-semibold flex items-center justify-center w-full"
                                 >
                                     {resendLoading ? (
                                         <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
@@ -212,7 +204,6 @@ const Register = () => {
                                     )}
                                 </button>
                             )}
-
                         </form>
                     </div>
                 )}
@@ -221,4 +212,4 @@ const Register = () => {
     );
 };
 
-export default Register
+export default Register;

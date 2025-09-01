@@ -32,12 +32,14 @@ const Notes = () => {
     const [editFields, setEditFields] = useState({ title: "", content: "", tags: "", isPinned: false, isArchived: false });
     const [searchTerm, setSearchTerm] = useState("");
     const [filter, setFilter] = useState("all");
-    const [sort, setSort] = useState("recent"); // recent | pinned | archived
+    const [sort, setSort] = useState("recent");
 
     const storedData = localStorage.getItem("user");
     const parsedData = storedData ? JSON.parse(storedData) : null;
-    const user = parsedData?.user;
-    const userId = user?._id;
+    const user = parsedData?.username;
+    const userId = parsedData?._id;
+    // console.log(user + " " + userId)
+    console.log(userId)
     const token = localStorage.getItem("token");
 
     useEffect(() => {
@@ -135,7 +137,7 @@ const Notes = () => {
         <div className="p-4 max-w-6xl mx-auto">
             <div className="flex flex-col items-center justify-center text-center mb-8">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">
-                    Welcome, {user?.username}!
+                    Welcome, {user}!
                 </h1>
                 <p className="text-gray-600 text-sm sm:text-base md:text-lg">
                     {user?.email?.replace(/^[^@]+/, "xxxxxx")}

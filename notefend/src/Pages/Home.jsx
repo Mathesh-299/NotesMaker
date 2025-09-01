@@ -1,16 +1,16 @@
 const Home = () => {
-    const loggedIn = localStorage.getItem("loggedIn") === "true";
+    const loggedIn = localStorage.getItem("LoggedIn") === "true";
 
     const storedUser = localStorage.getItem("user");
-    const user = storedUser ? JSON.parse(storedUser)?.user?.username : null;
+    const user = storedUser ? JSON.parse(storedUser)?.username : null;
 
-    console.log("Logged-in user:", user);
+    // console.log("Logged-in user:", user);
 
     return (
         <div className="min-h-screen bg-[#E6E0D9] flex flex-col items-center">
             <section className="w-full bg-[#E6E0D9] text-[#6B6B6B] py-24 flex flex-col items-center text-center px-4">
                 <h1 className="text-[#7A7A7A] text-2xl font-extrabold tracking-wide">
-                    {loggedIn && user ? user : "NoteCraft"}
+                    {loggedIn && user ? "Welcome "+user : "NoteCraft"}
                 </h1>
 
                 <p className="text-lg md:text-xl mb-8 max-w-2xl">

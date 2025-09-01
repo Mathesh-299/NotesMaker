@@ -54,14 +54,16 @@ const Login = () => {
             if (response.status === 200 || response.status === 201) {
                 toast.success("Account verified successfully!");
                 setOtp("");
-
                 localStorage.setItem("LoggedIn", "true");
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("user", JSON.stringify(response.data.user));
 
                 console.log(response.data);
-                navigate("/");
+                setTimeout(() => {
+                    navigate("/");
+                }, 2000);
             }
+
         } catch (error) {
             toast.error(error.response?.data?.message || "Invalid OTP, please try again");
         } finally {
