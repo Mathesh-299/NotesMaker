@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     },
     dateOfBirth: {
         type: Date
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true });
 
