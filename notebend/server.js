@@ -18,4 +18,5 @@ DB()
         console.log("DB error");
     })
 
-app.use("/api/user", require("./router/user"))
+app.use("/api/user", require("./router/user"));
+app.use("/api/notes", require("./router/notes"));

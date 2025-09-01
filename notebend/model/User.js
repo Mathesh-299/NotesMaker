@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
         type: Date
     },
     dateOfBirth: {
+        required: true,
         type: Date
     },
     isVerified: {
