@@ -41,9 +41,10 @@ const Notes = () => {
     // console.log(user + " " + userId)
     console.log(userId)
     const token = localStorage.getItem("token");
+    const loggedIn = localStorage.getItem("LoggedIn") === "true";
 
     useEffect(() => {
-        if (userId && token) fetchNotes();
+        if (userId && token && loggedIn) fetchNotes();
         else setLoading(false);
     }, [userId, token]);
 
@@ -130,7 +131,7 @@ const Notes = () => {
             });
     }, [notes, searchTerm, filter, sort]);
 
-    if (!userId) return <div className="p-4 text-center">Please log in to view your notes.</div>;
+    if (!loggedIn) return <div className="p-4 text-center">Please log in to view your notes.</div>;
     if (loading) return <div className="p-4 text-center">Loading notes...</div>;
 
     return (
