@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import API from "../../API/api";
+import API from "../API/api";
 
-export const Register = () => {
+const Register = () => {
     const [loading, setLoading] = useState(false);
     const [otpLoading, setOtpLoading] = useState(false);
     const [resendLoading, setResendLoading] = useState(false);
@@ -220,3 +220,5 @@ export const Register = () => {
         </div>
     );
 };
+
+export default Register

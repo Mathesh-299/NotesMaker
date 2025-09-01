@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../../API/api";
+import API from "../API/api";
 
 const Create = () => {
     const [title, setTitle] = useState("");
@@ -14,7 +14,7 @@ const Create = () => {
     const token = localStorage.getItem("token");
     const storedData = localStorage.getItem("user");
     const parsedData = storedData ? JSON.parse(storedData) : null;
-    const userId = parsedData?.user?._id; // will be sent as param
+    const userId = parsedData?.user?._id;
 
     const handleSubmit = async (e) => {
         e.preventDefault();

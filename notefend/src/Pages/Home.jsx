@@ -1,4 +1,3 @@
-
 const Home = () => {
     const loggedIn = localStorage.getItem("loggedIn") === "true";
 
@@ -71,6 +70,8 @@ const Home = () => {
             </section>
         </div>
     );
+
 };
+
 
 export default Home;

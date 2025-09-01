@@ -1,7 +1,7 @@
 import { Edit, Pin, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
-import API from "../../API/api";
+import API from "../API/api";
 
 const NoteCard = ({ note, onEdit, onDelete, canModify }) => (
     <div className="relative p-4 border rounded-lg shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition bg-white cursor-pointer group">
@@ -25,7 +25,6 @@ const NoteCard = ({ note, onEdit, onDelete, canModify }) => (
         )}
     </div>
 );
-
 const Notes = () => {
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -125,7 +124,7 @@ const Notes = () => {
             .sort((a, b) => {
                 if (sort === "pinned") return b.isPinned - a.isPinned;
                 if (sort === "archived") return a.isArchived - b.isArchived;
-                return new Date(b.updatedAt) - new Date(a.updatedAt); 
+                return new Date(b.updatedAt) - new Date(a.updatedAt);
             });
     }, [notes, searchTerm, filter, sort]);
 
@@ -143,7 +142,6 @@ const Notes = () => {
                 </p>
             </div>
 
-            {/* Search, Filter & Sort */}
             <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
                 <input
                     type="text"
@@ -263,5 +261,6 @@ const Notes = () => {
         </div>
     );
 };
+
 
 export default Notes;

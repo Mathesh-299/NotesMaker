@@ -2,7 +2,7 @@ import { LogOut, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
+const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();
@@ -180,3 +180,6 @@ export const Navbar = () => {
         </nav>
     );
 };
+
+
+export default Navbar;

@@ -1,18 +1,18 @@
 import { Route, Routes } from "react-router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Navbar } from "./asserts/Components/Navbar";
+import Navbar from "./Components/Navbar";
+import Create from "./Pages/Create";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Notes from "./Pages/Notes";
+import Register from "./Pages/Register";
 
-import Create from "./asserts/Pages/Create";
-import Home from "./asserts/Pages/Home";
-import Login from "./asserts/Pages/Login";
-import Notes from "./asserts/Pages/Notes";
-import { Register } from "./asserts/Pages/Register";
 const App = () => {
     return (
         <>
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
             <Navbar />
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signup" element={<Register />} />
