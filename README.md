@@ -64,7 +64,6 @@
 ### Authentication
 - `POST /auth/signup` – Register a new user  
 - `POST /auth/login` – User login  
-- `POST /auth/forgot-password` – Reset password with image verification  
 
 ### Notes
 - `GET /notes/:userId` – Get all notes for a user  
@@ -74,8 +73,7 @@
 - `PATCH /notes/pin/:noteId` – Toggle pin status  
 - `PATCH /notes/archive/:noteId` – Toggle archive status  
 
-### Image Upload
-- `POST /upload` – Upload images for notes or profile verification
+
 
 ---
 
@@ -83,7 +81,7 @@
 
 1. Clone the repository:
 ```bash
-git clone <repo-url>
+git clone [<repo-url>](https://github.com/Mathesh-299/NotesMaker.git)
 
 
 2.Install dependencies:
