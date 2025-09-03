@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../API/api";
 const Login = () => {
@@ -93,13 +93,14 @@ const Login = () => {
     return (
         <div className="min-h-[calc(100vh-2rem)] flex items-center justify-center bg-[#c5c9d37a] px-4 sm:px-6 md:px-8">
             <div className="bg-white/90 p-6 sm:p-8 md:p-10 rounded-xl w-full max-w-md border border-gray-200 shadow-sm transition-all hover:shadow-md">
-                <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#1E40AF] tracking-wide">
-                    Login
-                </h2>
-                <p className="text-center text-sm sm:text-base text-gray-500 mt-2">
-                    Access your account easily
-                </p>
-
+                <div className="bg-gray-800 text-white rounded-xl p-4 shadow-md">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-center tracking-wide">
+                        Login
+                    </h2>
+                    <p className="text-center text-sm sm:text-base mt-2">
+                        Access your account easily
+                    </p>
+                </div>
                 {step === "email" ? (
                     <form onSubmit={handleContinue} className="mt-6 space-y-6">
                         <div>
@@ -111,14 +112,20 @@ const Login = () => {
                                 placeholder="example@email.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-[#1E40AF] focus:border-[#1E40AF] text-gray-800 text-sm sm:text-base transition duration-300 ease-in-out hover:shadow-md"
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm 
+                                focus:ring-2 focus:ring-gray-800 focus:border-gray-800 
+                                text-gray-800 text-sm sm:text-base transition-all duration-300 
+                                hover:shadow-md hover:border-gray-700"
                             />
                         </div>
 
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-gradient-to-r from-[#1E40AF] to-blue-700 text-white py-3 rounded-xl font-semibold text-sm sm:text-base shadow-md hover:scale-105 transform transition duration-300 flex items-center justify-center disabled:opacity-60"
+                            className="w-full bg-gray-800 text-white py-3 rounded-xl font-semibold 
+                                text-sm sm:text-base shadow-md hover:bg-black hover:scale-105 
+                                transform transition duration-300 flex items-center justify-center 
+                                disabled:opacity-60"
                         >
                             {loading ? (
                                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -148,7 +155,10 @@ const Login = () => {
                         <button
                             type="submit"
                             disabled={otpLoading}
-                            className="w-full bg-gradient-to-r from-[#1E40AF] to-blue-700 text-white py-3 rounded-xl font-semibold text-sm sm:text-base shadow-md hover:scale-105 transform transition duration-300 flex items-center justify-center disabled:opacity-60"
+                            className="w-full bg-gray-800 text-white py-3 rounded-xl font-semibold 
+                            text-sm sm:text-base shadow-md hover:bg-black hover:scale-105 
+                            transform transition duration-300 flex items-center justify-center 
+                            disabled:opacity-60"
                         >
                             {otpLoading ? (
                                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -177,6 +187,24 @@ const Login = () => {
                         </div>
                     </form>
                 )}
+                <div className="mt-8">
+                    <div className="relative flex items-center">
+                        <div className="flex-grow border-t border-gray-400"></div>
+                        <span className="flex-shrink mx-3 text-gray-600 text-sm">New here?</span>
+                        <div className="flex-grow border-t border-gray-400"></div>
+                    </div>
+                    <p className="mt-4 text-center text-sm text-gray-900 font-bold">
+                        Don’t have an account?{" "}
+                        <Link
+                            to="/signup"
+                            className="text-gray-800 font-semibold hover:underline hover:text-black transition-colors duration-300"
+                        >
+                            Create one
+                        </Link>
+                    </p>
+                </div>
+
+
             </div>
         </div>
     );

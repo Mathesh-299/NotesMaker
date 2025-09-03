@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../API/api";
 
@@ -91,14 +91,17 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center bg-gradient-to-br from-[#ECECEC] to-[#D9D9D9] px-4">
+        <div className="min-h-[calc(100vh-3rem)] flex items-center justify-center bg-gradient-to-br from-[#ECECEC] to-[#D9D9D9] px-4">
             <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-200">
-                <h2 className="text-3xl font-extrabold text-center text-gray-800 tracking-wide">
-                    Sign Up
-                </h2>
-                <p className="text-center text-sm text-gray-500 mt-2">
-                    Create your account in just a few steps
-                </p>
+                <div className="bg-gray-800 text-white rounded-xl p-4 shadow-md">
+                    <h2 className="text-3xl font-extrabold text-center tracking-wide">
+                        Sign Up
+                    </h2>
+                    <p className="text-center text-sm mt-2">
+                        Create your account in just a few steps
+                    </p>
+                </div>
+
 
                 {step === "form" && (
                     <form onSubmit={handleSignup} className="mt-8 space-y-5">
@@ -207,6 +210,23 @@ const Register = () => {
                         </form>
                     </div>
                 )}
+                <div className="mt-8">
+                    <div className="relative flex items-center">
+                        <div className="flex-grow border-t border-gray-300"></div>
+                        <span className="flex-shrink mx-3 text-gray-500 text-sm">Already a member?</span>
+                        <div className="flex-grow border-t border-gray-300"></div>
+                    </div>
+                    <p className="mt-4 text-center text-sm">
+                        Yes, I have an account!{" "}
+                        <Link
+                            to="/login"
+                            className="text-[#1E40AF] font-semibold hover:underline hover:text-blue-800 transition-colors duration-300"
+                        >
+                            Sign In
+                        </Link>
+                    </p>
+                </div>
+
             </div>
         </div>
     );
