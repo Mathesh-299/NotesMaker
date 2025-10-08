@@ -14,8 +14,9 @@ const Create = () => {
     const token = localStorage.getItem("token");
     const storedData = localStorage.getItem("user");
     const parsedData = storedData ? JSON.parse(storedData) : null;
-    const userId = parsedData?.user?._id;
-
+    const userId = parsedData?._id;
+    console.log(parsedData)
+    console.log(userId)
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -33,8 +34,6 @@ const Create = () => {
                 isPinned,
                 isArchived,
             };
-
-            // Send userId as route param
             const response = await API.post(`/notes/addNotes/${userId}`, payload, {
                 headers: {
                     Authorization: `Bearer ${token}`,
